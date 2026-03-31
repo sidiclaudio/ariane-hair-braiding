@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ariane Hair Braiding | Luxury African Braiding Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET & TOKENS ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #0d0b09;
+      --cream:     #f5f0e8;
+      --gold:      #b8954a;
+      --gold-lt:   #d4af6e;
+      --gold-dk:   #8a6c2f;
+      --warm:      #2a1f14;
+      --mid:       #5c4a35;
+      --dust:      #e8dfd0;
+      --ff-display: 'Cormorant Garamond', Georgia, serif;
+      --ff-body:    'Jost', sans-serif;
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--ff-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.7;
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* ── CUSTOM CURSOR ───────────────────────────────────────── */
+    .cursor-dot, .cursor-ring {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s var(--ease-out), opacity 0.3s;
+    }
+    .cursor-dot  { width: 6px; height: 6px; background: var(--gold); }
+    .cursor-ring { width: 36px; height: 36px; border: 1px solid var(--gold); opacity: 0.5; transition: transform 0.18s var(--ease-out), width 0.25s, height 0.25s, opacity 0.3s; }
+    .cursor-ring.hovered { width: 60px; height: 60px; opacity: 0.8; }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 60px;
+      mix-blend-mode: normal;
+      background: rgba(13, 11, 9, 0.72);
+      backdrop-filter: blur(8px);
+      transition: background 0.4s, padding 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(13, 11, 9, 0.92);
+      backdrop-filter: blur(18px);
+      padding: 18px 60px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      line-height: 0;
+      transition: opacity 0.3s;
+    }
+    .nav-logo:hover { opacity: 0.85; }
+    .nav-logo svg { display: block; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      font-family: var(--ff-body);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dust);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.35s var(--ease-out);
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-book {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 10px 24px;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+    }
+    .nav-book:hover { background: var(--gold); color: var(--ink); }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh; min-height: 700px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    .hero-left {
+      background: var(--warm);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 60px 80px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 30 Q15 0 30 30 Q45 60 60 30' stroke='%23b8954a' stroke-width='0.3' fill='none' opacity='0.15'/%3E%3C/svg%3E") repeat;
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: var(--ff-body);
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s 0.3s var(--ease-out) forwards;
+    }
+    .hero-title {
+      font-family: var(--ff-display);
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 300;
+      line-height: 1.0;
+      color: var(--cream);
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s 0.5s var(--ease-out) forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-lt); display: block; }
+    .hero-subtitle {
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(245,240,232,0.65);
+      max-width: 340px;
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s 0.75s var(--ease-out) forwards;
+    }
+    .hero-ctas {
+      display: flex; gap: 20px; align-items: center;
+      opacity: 0;
+      animation: fadeUp 1s 1s var(--ease-out) forwards;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--ink);
+      font-family: var(--ff-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      text-decoration: none;
+      border: none;
+      cursor: none;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .btn-ghost {
+      font-family: var(--ff-body);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dust);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .btn-ghost::after { content: '→'; transition: transform 0.3s; }
+    .btn-ghost:hover::after { transform: translateX(4px); }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.85) sepia(0.15);
+      transform: scale(1.05);
+      animation: zoomOut 2s 0s var(--ease-out) forwards;
+    }
+    .hero-right::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--warm) 0%, transparent 30%);
+      z-index: 1;
+    }
+
+    /* floating badge */
+    .hero-badge {
+      position: absolute;
+      bottom: 60px; right: 60px;
+      z-index: 3;
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      background: rgba(13, 11, 9, 0.7);
+      backdrop-filter: blur(8px);
+      animation: spin 20s linear infinite;
+    }
+    .hero-badge-inner {
+      position: absolute;
+      display: flex; flex-direction: column;
+      align-items: center;
+      animation: spinReverse 20s linear infinite;
+    }
+    .hero-badge-inner span:first-child {
+      font-family: var(--ff-display);
+      font-size: 1.4rem;
+      color: var(--gold);
+    }
+    .hero-badge-inner span:last-child {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dust);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spinReverse { to { transform: rotate(-360deg); } }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes zoomOut { to { transform: scale(1); } }
+
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      z-index: 10;
+      opacity: 0; animation: fadeUp 1s 1.5s var(--ease-out) forwards;
+    }
+    .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(245,240,232,0.4); }
+    .scroll-line { width: 1px; height: 50px; background: linear-gradient(var(--gold), transparent); animation: scrollDrop 2s 2s ease-in-out infinite; }
+    @keyframes scrollDrop { 0%,100%{ transform: scaleY(0); transform-origin: top; } 50%{ transform: scaleY(1); transform-origin: top; } }
+
+    /* ── MARQUEE STRIP ────────────────────────────────────────── */
+    .marquee-strip {
+      background: var(--gold);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 14px 0;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-item {
+      font-family: var(--ff-display);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--ink);
+      padding: 0 40px;
+    }
+    .marquee-dot { color: var(--warm); margin: 0 -20px; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ── SECTION SHARED ───────────────────────────────────────── */
+    section { padding: 120px 60px; }
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .section-label::before { content: ''; width: 30px; height: 1px; background: var(--gold); display: inline-block; }
+    .section-heading {
+      font-family: var(--ff-display);
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .section-heading em { font-style: italic; color: var(--gold); }
+
+    /* ── ABOUT ────────────────────────────────────────────────── */
+    .about { background: var(--warm); color: var(--cream); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover;
+      filter: sepia(0.2) brightness(0.9);
+    }
+    .about-img-accent {
+      position: absolute;
+      bottom: -30px; right: -30px;
+      width: 60%;
+      aspect-ratio: 1;
+      border: 1px solid var(--gold);
+      z-index: -1;
+    }
+    .about-text .section-heading { color: var(--cream); }
+    .about-text p {
+      color: rgba(245,240,232,0.7);
+      font-size: 0.95rem;
+      max-width: 440px;
+      margin-bottom: 18px;
+    }
+    .about-stats {
+      display: flex; gap: 48px; margin-top: 40px;
+    }
+    .about-stat-num {
+      font-family: var(--ff-display);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .about-stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.5);
+      margin-top: 4px;
+    }
+
+    /* ── SERVICES ─────────────────────────────────────────────── */
+    .services { background: var(--cream); }
+    .services-inner { max-width: 1200px; margin: 0 auto; }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .service-card {
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: none;
+    }
+    .service-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.55) sepia(0.2);
+      transition: transform 0.7s var(--ease-out), filter 0.7s;
+    }
+    .service-card:hover img { transform: scale(1.06); filter: brightness(0.35) sepia(0.3); }
+    .service-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 30px 28px;
+      background: linear-gradient(transparent, rgba(13,11,9,0.9));
+      transform: translateY(20px);
+      transition: transform 0.5s var(--ease-out);
+    }
+    .service-card:hover .service-info { transform: translateY(0); }
+    .service-name {
+      font-family: var(--ff-display);
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--cream);
+    }
+    .service-price {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-top: 6px;
+    }
+    .service-desc {
+      font-size: 0.8rem;
+      color: rgba(245,240,232,0.6);
+      margin-top: 10px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s var(--ease-out);
+    }
+    .service-card:hover .service-desc { max-height: 80px; }
+
+    /* ── GALLERY ─────────────────────────────────────────────── */
+    .gallery { background: var(--ink); padding: 120px 0; }
+    .gallery-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+    .gallery-header { margin-bottom: 48px; }
+    .gallery-header .section-heading { color: var(--cream); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: repeat(2, 280px);
+      gap: 3px;
+    }
+    .gallery-item { overflow: hidden; }
+    .gallery-item:first-child { grid-row: span 2; }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.8) sepia(0.1);
+      transition: transform 0.7s var(--ease-out), filter 0.5s;
+    }
+    .gallery-item:hover img { transform: scale(1.05); filter: brightness(0.95) sepia(0); }
+
+    /* ── TESTIMONIALS ─────────────────────────────────────────── */
+    .testimonials { background: var(--dust); }
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+    .testimonials-header { text-align: center; margin-bottom: 64px; }
+    .testimonials-header .section-label { justify-content: center; }
+    .testimonials-header .section-label::before { display: none; }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .testimonial-card {
+      background: var(--cream);
+      padding: 40px 36px;
+      border-bottom: 2px solid var(--gold);
+      position: relative;
+    }
+    .testimonial-quote {
+      font-family: var(--ff-display);
+      font-size: 4rem;
+      color: var(--gold);
+      line-height: 0.5;
+      margin-bottom: 20px;
+      opacity: 0.4;
+    }
+    .testimonial-text {
+      font-family: var(--ff-display);
+      font-size: 1.1rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--mid);
+      margin-bottom: 24px;
+    }
+    .testimonial-author { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .testimonial-stars { color: var(--gold); font-size: 0.65rem; letter-spacing: 0.1em; margin-bottom: 16px; }
+
+    /* ── BOOKING ─────────────────────────────────────────────── */
+    .booking {
+      background: var(--warm);
+      color: var(--cream);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .booking::before {
+      content: 'ARIANE';
+      position: absolute;
+      font-family: var(--ff-display);
+      font-size: 22vw;
+      font-weight: 300;
+      color: rgba(184,149,74,0.04);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .booking-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .booking .section-label { justify-content: center; }
+    .booking .section-label::before { display: none; }
+    .booking .section-heading { color: var(--cream); font-size: clamp(2.8rem, 5vw, 5rem); margin-bottom: 20px; }
+    .booking p { color: rgba(245,240,232,0.6); margin-bottom: 48px; font-size: 0.95rem; max-width: 440px; margin-left: auto; margin-right: auto; }
+    .booking-form {
+      display: flex; flex-direction: column; gap: 16px;
+      max-width: 460px; margin: 0 auto;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-input {
+      background: transparent;
+      border: 1px solid rgba(184,149,74,0.35);
+      padding: 16px 20px;
+      color: var(--cream);
+      font-family: var(--ff-body);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      outline: none;
+      transition: border-color 0.3s;
+      width: 100%;
+    }
+    .form-input::placeholder { color: rgba(245,240,232,0.3); }
+    .form-input:focus { border-color: var(--gold); }
+    select.form-input option { background: var(--warm); }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 80px 60px 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      max-width: 1200px; margin: 0 auto;
+      padding-bottom: 60px;
+      border-bottom: 1px solid rgba(184,149,74,0.2);
+    }
+    .footer-brand { }
+    .footer-logo {
+      line-height: 0;
+      margin-bottom: 16px;
+    }
+    .footer-logo svg { display: block; }
+    .footer-tagline { font-size: 0.8rem; color: rgba(245,240,232,0.4); max-width: 240px; line-height: 1.8; }
+    .footer-col h4 {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col a { color: rgba(245,240,232,0.5); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      max-width: 1200px; margin: 32px auto 0;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy { font-size: 0.7rem; color: rgba(245,240,232,0.25); letter-spacing: 0.1em; }
+    .footer-socials { display: flex; gap: 20px; }
+    .footer-socials a {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.35);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-socials a:hover { color: var(--gold); }
+
+    /* ── GOLD DIVIDER ────────────────────────────────────────── */
+    .divider {
+      width: 60px; height: 1px;
+      background: var(--gold);
+      margin: 0 auto 48px;
+    }
+
+    /* ── HAMBURGER MENU ─────────────────────────────────────── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      position: relative;
+      z-index: 301;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--dust);
+      transition: transform 0.4s var(--ease-out), opacity 0.3s;
+    }
+    .nav-toggle.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(13, 11, 9, 0.96);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      transition: opacity 0.4s var(--ease-out);
+    }
+    .mobile-menu.open {
+      display: flex;
+      opacity: 1;
+    }
+    .mobile-menu a {
+      font-family: var(--ff-display);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-menu .mobile-book {
+      margin-top: 20px;
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 14px 36px;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+
+    /* Touch devices — disable custom cursor */
+    @media (hover: none) and (pointer: coarse) {
+      body { cursor: auto; }
+      .cursor-dot, .cursor-ring { display: none; }
+      .service-card { cursor: pointer; }
+      .btn-primary { cursor: pointer; }
+      .service-info { transform: translateY(0); }
+      .service-desc { max-height: 80px; }
+    }
+
+    /* Tablet — iPad portrait & landscape (up to 1024px) */
+    @media (max-width: 1024px) {
+      nav { padding: 20px 36px; }
+      nav.scrolled { padding: 14px 36px; }
+      section { padding: 100px 36px; }
+      .gallery { padding: 100px 0; }
+      .gallery-inner { padding: 0 36px; }
+      footer { padding: 60px 36px 40px; }
+      .about-grid { gap: 50px; }
+      .about-stats { gap: 32px; }
+      .footer-grid { gap: 40px; }
+    }
+
+    /* Tablet & below (up to 900px) */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .nav-book { display: none; }
+      .nav-toggle { display: flex; }
+      section { padding: 80px 24px; }
+
+      /* Hero */
+      .hero { grid-template-columns: 1fr; min-height: 600px; }
+      .hero-right { position: absolute; inset: 0; z-index: 0; }
+      .hero-right::after {
+        background: linear-gradient(to top, var(--warm) 10%, rgba(42,31,20,0.7) 50%, rgba(42,31,20,0.4) 100%);
+      }
+      .hero-left { background: transparent; z-index: 2; padding: 0 24px 60px; }
+      .hero-left::after { display: none; }
+      .hero-badge { display: none; }
+      .hero-title { font-size: clamp(2.8rem, 8vw, 4.5rem); }
+
+      /* About */
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-img-accent { display: none; }
+      .about-img { aspect-ratio: 3/4; object-position: top; }
+
+      /* Services */
+      .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .service-info { transform: translateY(0); }
+      .service-desc { max-height: 80px; }
+
+      /* Gallery */
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:first-child { grid-row: span 1; }
+      .gallery-item img { aspect-ratio: 1; }
+
+      /* Testimonials */
+      .testimonial-grid { grid-template-columns: 1fr; }
+
+      /* Footer */
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+
+      /* Form */
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* Small phones (up to 480px) */
+    @media (max-width: 480px) {
+      nav { padding: 16px 18px; }
+      nav.scrolled { padding: 12px 18px; }
+      .nav-logo svg { height: 42px; }
+      section { padding: 64px 18px; }
+      .gallery { padding: 64px 0; }
+      .gallery-inner { padding: 0 18px; }
+      footer { padding: 48px 18px 32px; }
+
+      /* Hero */
+      .hero { min-height: 100svh; }
+      .hero-left { padding: 0 18px 40px; }
+      .hero-title { font-size: clamp(2.4rem, 10vw, 3.5rem); margin-bottom: 20px; }
+      .hero-subtitle { font-size: 0.85rem; margin-bottom: 32px; }
+      .hero-ctas { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .btn-primary { padding: 14px 32px; font-size: 0.68rem; }
+      .scroll-hint { display: none; }
+
+      /* About */
+      .about-stats { flex-direction: column; gap: 24px; }
+      .about-stat-num { font-size: 2.4rem; }
+
+      /* Services */
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { aspect-ratio: 4/3; }
+      .service-name { font-size: 1.4rem; }
+
+      /* Gallery */
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item img { aspect-ratio: 4/3; }
+
+      /* Testimonials */
+      .testimonial-card { padding: 28px 24px; }
+      .testimonial-text { font-size: 1rem; }
+
+      /* Booking */
+      .booking .section-heading { font-size: clamp(2rem, 8vw, 3rem); }
+
+      /* Footer */
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-logo svg { height: 60px; }
+      .footer-socials { gap: 14px; }
+      .footer-socials a { font-size: 0.6rem; }
+
+      /* Marquee */
+      .marquee-item { font-size: 0.9rem; padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo" aria-label="Ariane Hair Braiding — Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" height="54" role="img" aria-label="Ariane Hair Braiding Logo">
+        <defs>
+          <linearGradient id="navGoldLine" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="transparent"/>
+            <stop offset="25%"  stop-color="#B8954A" stop-opacity="0.55"/>
+            <stop offset="50%"  stop-color="#D4AF6E"/>
+            <stop offset="75%"  stop-color="#B8954A" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </linearGradient>
+        </defs>
+        <!-- Crown arc motif -->
+        <g fill="none" stroke="#B8954A" opacity="0.65">
+          <path d="M 178 57 Q 240 20 302 57" stroke-width="0.9" stroke-linecap="round"/>
+          <path d="M 193 57 Q 240 29 287 57" stroke-width="1.1" stroke-linecap="round"/>
+          <path d="M 208 57 Q 240 38 272 57" stroke-width="1.3" stroke-linecap="round"/>
+        </g>
+        <!-- Crown apex diamond -->
+        <polygon points="240,16 244.5,22 240,28 235.5,22" fill="#D4AF6E" opacity="0.95"/>
+        <!-- ARIANE wordmark -->
+        <text x="240" y="94" font-family="Cormorant Garamond, Georgia, serif" font-size="46" font-weight="300" fill="#F0EAE0" text-anchor="middle" letter-spacing="13">ARIANE</text>
+        <!-- Divider -->
+        <line x1="44" y1="108" x2="436" y2="108" stroke="url(#navGoldLine)" stroke-width="0.8"/>
+        <polygon points="240,103 244,108 240,113 236,108" fill="#B8954A" opacity="0.9"/>
+        <circle cx="220" cy="108" r="1.3" fill="#B8954A" opacity="0.45"/>
+        <circle cx="260" cy="108" r="1.3" fill="#B8954A" opacity="0.45"/>
+        <!-- HAIR BRAIDING subtext -->
+        <text x="240" y="133" font-family="Cormorant Garamond, Georgia, serif" font-size="16" font-weight="300" fill="#C4A96C" text-anchor="middle" letter-spacing="7">HAIR  BRAIDING</text>
+        <!-- Border frame -->
+        <rect x="28" y="12" width="424" height="136" fill="none" stroke="#B8954A" stroke-width="0.4" opacity="0.18"/>
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#booking" class="nav-book">Book Now</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" class="mobile-link">Services</a>
+    <a href="#gallery" class="mobile-link">Gallery</a>
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <a href="#booking" class="mobile-book">Book Now</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Luxury African Braiding Studio · Est. 2018</p>
+      <h1 class="hero-title">
+        Where Art<br>Meets <em>Crown.</em>
+      </h1>
+      <p class="hero-subtitle">
+        Precision braiding rooted in African tradition, elevated to a luxury art form. Your hair tells your story — we tell it beautifully.
+      </p>
+      <div class="hero-ctas">
+        <a href="#booking" class="btn-primary">Book Your Session</a>
+        <a href="#services" class="btn-ghost">View Services</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img class="hero-img"
+        src="https://images.unsplash.com/photo-1709672262859-68cb9b39ae4f?w=900&q=80"
+        alt="Woman with long braids wearing a jean shirt">
+      <div class="hero-badge">
+        <div class="hero-badge-inner">
+          <span>500+</span>
+          <span>Happy Clients</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Box Braids</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Knotless Braids</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Faux Locs</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Senegalese Twists</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Cornrows</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Passion Twists</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Ghana Weaving</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Goddess Locs</span><span class="marquee-dot">✦</span>
+      <!-- duplicate for seamless loop -->
+      <span class="marquee-item">Box Braids</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Knotless Braids</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Faux Locs</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Senegalese Twists</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Cornrows</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Passion Twists</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Ghana Weaving</span><span class="marquee-dot">✦</span>
+      <span class="marquee-item">Goddess Locs</span><span class="marquee-dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <img class="about-img"
+          src="https://images.unsplash.com/photo-1725034246087-3cf3fa074547?w=600&q=80"
+          alt="Ariane, master braider — elegant Black woman posing">
+        <div class="about-img-accent"></div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-heading">Rooted in Tradition,<br><em>Refined for You.</em></h2>
+        <p>Ariane Hair Braiding was born from a deep reverence for African hair artistry — a tradition passed down through generations, now reimagined for the modern woman who expects nothing less than excellence.</p>
+        <p>Every braid is a statement. Every client, royalty. We take time to understand your vision, your hair's unique texture, and your lifestyle before a single strand is touched.</p>
+        <div class="about-stats">
+          <div>
+            <div class="about-stat-num">7+</div>
+            <div class="about-stat-label">Years of<br>Experience</div>
+          </div>
+          <div>
+            <div class="about-stat-num">500+</div>
+            <div class="about-stat-label">Clients<br>Served</div>
+          </div>
+          <div>
+            <div class="about-stat-num">15+</div>
+            <div class="about-stat-label">Braid<br>Styles</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-inner">
+      <div class="services-header">
+        <div>
+          <p class="section-label">What We Offer</p>
+          <h2 class="section-heading">Our <em>Signature</em> Services</h2>
+        </div>
+        <a href="#booking" class="btn-primary">Book a Style</a>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1711637819201-1f2671641b4e?w=500&q=80" alt="Knotless Braids">
+          <div class="service-info">
+            <div class="service-name">Knotless Braids</div>
+            <div class="service-price">Starting from $180</div>
+            <div class="service-desc">Classic &amp; boho knotless — feed-in technique for a seamless, pain-free, natural look.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1770392170798-e3acb93bde59?w=500&q=80" alt="Box Braids">
+          <div class="service-info">
+            <div class="service-name">Box Braids</div>
+            <div class="service-price">Starting from $160</div>
+            <div class="service-desc">Timeless, versatile, and protective. Styled to perfection in any length or thickness.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://plus.unsplash.com/premium_photo-1694618624447-93f2e85032d9?w=500&q=80" alt="Cornrows">
+          <div class="service-info">
+            <div class="service-name">Cornrows</div>
+            <div class="service-price">Starting from $80</div>
+            <div class="service-desc">Classic flat braids &amp; stitch braids — from simple lines to intricate geometric art.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://plus.unsplash.com/premium_photo-1694618623996-39fa12510bf3?w=500&q=80" alt="Goddess Braids">
+          <div class="service-info">
+            <div class="service-name">Goddess Braids</div>
+            <div class="service-price">Starting from $120</div>
+            <div class="service-desc">Bold, oversized braids fit for royalty. A regal statement that commands attention.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="senegalese-twist.jpg" alt="Senegalese Twists">
+          <div class="service-info">
+            <div class="service-name">Senegalese Twists</div>
+            <div class="service-price">Starting from $150</div>
+            <div class="service-desc">Silky, elegant rope twists that flow beautifully and protect your natural hair.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1674075303059-951059d2914d?w=500&q=80" alt="Passion Twists">
+          <div class="service-info">
+            <div class="service-name">Passion Twists</div>
+            <div class="service-price">Starting from $160</div>
+            <div class="service-desc">Passion, spring &amp; Nubian twists — soft, curly, and effortlessly natural.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://plus.unsplash.com/premium_photo-1694618624187-431b428363a0?w=500&q=80" alt="Crochet Braids">
+          <div class="service-info">
+            <div class="service-name">Crochet Braids</div>
+            <div class="service-price">Starting from $120</div>
+            <div class="service-desc">Quick, lightweight, and endlessly versatile. A protective style with limitless texture options.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1653263169991-50fb6e1c8836?w=500&q=80" alt="Faux Locs">
+          <div class="service-info">
+            <div class="service-name">Faux Locs</div>
+            <div class="service-price">Starting from $200</div>
+            <div class="service-desc">Faux locs, soft locs &amp; butterfly locs — textured beauty without the long-term commitment.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="https://plus.unsplash.com/premium_photo-1670006474124-a23db3cde1b9?w=500&q=80" alt="Micro Braids">
+          <div class="service-info">
+            <div class="service-name">Micro Braids</div>
+            <div class="service-price">Starting from $250</div>
+            <div class="service-desc">Delicate, intricate, and stunning. Ultra-fine braids for the ultimate in detail and elegance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-inner">
+      <div class="gallery-header">
+        <p class="section-label" style="color:var(--gold)">Our Work</p>
+        <h2 class="section-heading" style="color:var(--cream)">The <em>Art</em> We Create</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1527203561188-dae1bc1a417f?w=700&q=80" alt="Woman with braids posing by yellow wall">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1583899536095-98b6c82324ed?w=400&q=80" alt="Close-up portrait of woman with braided hair">
+        </div>
+        <div class="gallery-item">
+          <img src="https://plus.unsplash.com/premium_photo-1726862841008-ce1b97cefc40?w=400&q=80" alt="Black woman with dreadlocks hairstyle">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1665989780153-2af3ae283b10?w=400&q=80" alt="Woman with curly natural hair">
+        </div>
+        <div class="gallery-item">
+          <img src="https://plus.unsplash.com/premium_photo-1726848185134-286ff1853af2?w=400&q=80" alt="Beautiful woman with styled hair portrait">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="testimonials-header">
+        <p class="section-label">Client Love</p>
+        <h2 class="section-heading">What Our Queens <em>Say</em></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">Ariane is an absolute artist. My knotless braids lasted 8 weeks and every single person asked who did my hair. I will never go anywhere else.</p>
+          <div class="testimonial-author">— Destiny M.</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">The salon is beautiful and the experience felt truly luxurious. My scalp wasn't sore at all afterward. This is how braiding should feel.</p>
+          <div class="testimonial-author">— Imani T.</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">I drove 45 minutes for my appointment and I'd do it again in a heartbeat. The faux locs she did for me were the most beautiful I've ever had.</p>
+          <div class="testimonial-author">— Simone K.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking" id="booking">
+    <div class="booking-inner">
+      <p class="section-label">Reserve Your Chair</p>
+      <h2 class="section-heading">Ready to <em>Crown</em><br>Yourself?</h2>
+      <p>Fill out the form below and we'll reach out within 24 hours to confirm your appointment and discuss your style.</p>
+      <form class="booking-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <input class="form-input" type="text" placeholder="First Name" required>
+          <input class="form-input" type="text" placeholder="Last Name" required>
+        </div>
+        <input class="form-input" type="email" placeholder="Email Address" required>
+        <input class="form-input" type="tel" placeholder="Phone Number">
+        <select class="form-input">
+          <option value="" disabled selected>Select a Service</option>
+          <option>Knotless Braids</option>
+          <option>Senegalese Twists</option>
+          <option>Faux Locs</option>
+          <option>Cornrows</option>
+          <option>Passion Twists</option>
+          <option>Consultation (Free)</option>
+          <option>Other / Not Sure</option>
+        </select>
+        <input class="form-input" type="date">
+        <button type="submit" class="btn-primary" style="border:none;cursor:none;font-size:0.72rem;">
+          Request Appointment
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" height="80" role="img" aria-label="Ariane Hair Braiding Logo">
+            <defs>
+              <linearGradient id="footerGoldLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="transparent"/>
+                <stop offset="25%"  stop-color="#B8954A" stop-opacity="0.55"/>
+                <stop offset="50%"  stop-color="#D4AF6E"/>
+                <stop offset="75%"  stop-color="#B8954A" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </linearGradient>
+            </defs>
+            <g fill="none" stroke="#B8954A" opacity="0.55">
+              <path d="M 178 57 Q 240 20 302 57" stroke-width="0.9" stroke-linecap="round"/>
+              <path d="M 193 57 Q 240 29 287 57" stroke-width="1.1" stroke-linecap="round"/>
+              <path d="M 208 57 Q 240 38 272 57" stroke-width="1.3" stroke-linecap="round"/>
+            </g>
+            <polygon points="240,16 244.5,22 240,28 235.5,22" fill="#D4AF6E" opacity="0.9"/>
+            <text x="240" y="94" font-family="Cormorant Garamond, Georgia, serif" font-size="46" font-weight="300" fill="#F0EAE0" text-anchor="middle" letter-spacing="13">ARIANE</text>
+            <line x1="44" y1="108" x2="436" y2="108" stroke="url(#footerGoldLine)" stroke-width="0.8"/>
+            <polygon points="240,103 244,108 240,113 236,108" fill="#B8954A" opacity="0.85"/>
+            <circle cx="220" cy="108" r="1.3" fill="#B8954A" opacity="0.4"/>
+            <circle cx="260" cy="108" r="1.3" fill="#B8954A" opacity="0.4"/>
+            <text x="240" y="133" font-family="Cormorant Garamond, Georgia, serif" font-size="16" font-weight="300" fill="#C4A96C" text-anchor="middle" letter-spacing="7">HAIR  BRAIDING</text>
+            <rect x="28" y="12" width="424" height="136" fill="none" stroke="#B8954A" stroke-width="0.4" opacity="0.15"/>
+          </svg>
+        </div>
+        <p class="footer-tagline">Where African braiding tradition meets modern luxury. Your crown deserves the best.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#booking">Book Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Knotless Braids</a></li>
+          <li><a href="#services">Faux Locs</a></li>
+          <li><a href="#services">Senegalese Twists</a></li>
+          <li><a href="#services">Cornrows</a></li>
+          <li><a href="#services">Passion Twists</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hours</h4>
+        <ul>
+          <li><a href="#">Mon–Thu: 8am – 7pm</a></li>
+          <li><a href="#">Fri–Sat: 7am – 7pm</a></li>
+          <li><a href="#">Sunday: 8am – 7pm</a></li>
+          <li style="margin-top:16px"><a href="tel:+15551234567">(555) 123-4567</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#95fdf0f9f9fad5f4e7fcf4fbf0fdf4fce7f7e7f4fcf1fcfbf2bbf6faf8"><span class="__cf_email__" data-cfemail="2149444d4d4e61405348404f44494048534353404845484f460f424e4c">[email&#160;protected]</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Ariane Hair Braiding. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // ── Cursor ─────────────────────────────────────────────────
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', e => {
+      dot.style.left  = e.clientX + 'px';
+      dot.style.top   = e.clientY + 'px';
+      ring.style.left = e.clientX + 'px';
+      ring.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, .service-card, .gallery-item').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+    });
+
+    // ── Nav scroll ─────────────────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Form submit ────────────────────────────────────────────
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = '✦ Request Received!';
+      btn.style.background = '#8a6c2f';
+      setTimeout(() => {
+        btn.textContent = 'Request Appointment';
+        btn.style.background = '';
+        e.target.reset();
+      }, 3000);
+    }
+
+    // ── Fade-in on scroll ──────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .testimonial-card, .gallery-item, .about-stat-num').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out)';
+      observer.observe(el);
+    });
+
+    // ── Mobile menu toggle ──────────────────────────────────
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+</body>
+</html>
