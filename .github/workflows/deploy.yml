@@ -30,4 +30,8 @@ jobs:
             --exclude ".gitignore" \
             --exclude "CLAUDE.md" \
             --exclude ".claude/*" \
-            --exclude ".DS_Store"
+            --exclude ".DS_Store" \
+            --exclude "terraform/*" \
+            --exclude "process_images.py" \
+            --exclude "business-plan.md" \
+            --exclude "__pycache__/*"

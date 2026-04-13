@@ -358,10 +358,18 @@
     /* ── SERVICES ─────────────────────────────────────────────── */
     .services { background: var(--cream); }
     .services-inner { max-width: 1200px; margin: 0 auto; }
-    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
+    .services-tagline {
+      font-family: var(--ff-display);
+      font-size: 1.1rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--mid);
+      margin-bottom: 48px;
+    }
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 2px;
     }
     .service-card {
@@ -374,10 +382,11 @@
     .service-card img {
       width: 100%; height: 100%;
       object-fit: cover;
-      filter: brightness(0.55) sepia(0.2);
+      object-position: top center;
+      filter: brightness(0.85) contrast(1.02);
       transition: transform 0.7s var(--ease-out), filter 0.7s;
     }
-    .service-card:hover img { transform: scale(1.06); filter: brightness(0.35) sepia(0.3); }
+    .service-card:hover img { transform: scale(1.06); filter: brightness(0.55) contrast(1.05); }
     .service-info {
       position: absolute; bottom: 0; left: 0; right: 0;
       padding: 30px 28px;
@@ -652,6 +661,7 @@
       .about-grid { gap: 50px; }
       .about-stats { gap: 32px; }
       .footer-grid { gap: 40px; }
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     /* Tablet & below (up to 900px) */
@@ -909,77 +919,102 @@
         </div>
         <a href="#booking" class="btn-primary">Book a Style</a>
       </div>
+      <p class="services-tagline">Braided with love by Ariane</p>
       <div class="services-grid">
         <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1711637819201-1f2671641b4e?w=500&q=80" alt="Knotless Braids">
+          <img src="images/processed/knotless_braids.jpg" alt="Knotless Braids by Ariane">
           <div class="service-info">
             <div class="service-name">Knotless Braids</div>
+            <div class="service-price">Starting from $130</div>
+            <div class="service-desc">Feed-in technique for a seamless, pain-free, natural look that lasts.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="images/processed/boha_boha_braids.jpg" alt="Boho Braids by Ariane">
+          <div class="service-info">
+            <div class="service-name">Boho Braids</div>
             <div class="service-price">Starting from $180</div>
-            <div class="service-desc">Classic &amp; boho knotless — feed-in technique for a seamless, pain-free, natural look.</div>
+            <div class="service-desc">Curly, free-flowing boho knotless with effortless texture and movement.</div>
           </div>
         </div>
         <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1770392170798-e3acb93bde59?w=500&q=80" alt="Box Braids">
+          <img src="images/processed/french_curl.jpg" alt="French Curl Braids by Ariane">
           <div class="service-info">
-            <div class="service-name">Box Braids</div>
-            <div class="service-price">Starting from $160</div>
-            <div class="service-desc">Timeless, versatile, and protective. Styled to perfection in any length or thickness.</div>
+            <div class="service-name">French Curl Braids</div>
+            <div class="service-price">Starting from $200</div>
+            <div class="service-desc">Elegant curled ends with a sleek braided base. Modern and feminine.</div>
           </div>
         </div>
         <div class="service-card">
-          <img src="https://plus.unsplash.com/premium_photo-1694618624447-93f2e85032d9?w=500&q=80" alt="Cornrows">
+          <img src="images/processed/feeding_cornrows.jpg" alt="Feed-In Cornrows by Ariane">
           <div class="service-info">
-            <div class="service-name">Cornrows</div>
-            <div class="service-price">Starting from $80</div>
-            <div class="service-desc">Classic flat braids &amp; stitch braids — from simple lines to intricate geometric art.</div>
+            <div class="service-name">Feed-In Cornrows</div>
+            <div class="service-price">Starting from $60</div>
+            <div class="service-desc">Intricate, sculpted cornrow patterns — from classic lines to bold geometric art.</div>
           </div>
         </div>
         <div class="service-card">
-          <img src="https://plus.unsplash.com/premium_photo-1694618623996-39fa12510bf3?w=500&q=80" alt="Goddess Braids">
+          <img src="images/processed/stitch_braids.jpg" alt="Stitch Braids by Ariane" style="object-position: center 60%">
           <div class="service-info">
-            <div class="service-name">Goddess Braids</div>
-            <div class="service-price">Starting from $120</div>
-            <div class="service-desc">Bold, oversized braids fit for royalty. A regal statement that commands attention.</div>
+            <div class="service-name">Stitch Braids</div>
+            <div class="service-price">Starting from $40</div>
+            <div class="service-desc">Clean, defined parts with precise braiding technique. A bold, structured look.</div>
           </div>
         </div>
         <div class="service-card">
-          <img src="senegalese-twist.jpg" alt="Senegalese Twists">
+          <img src="images/processed/two_cornrows.jpg" alt="Two Cornrows by Ariane">
+          <div class="service-info">
+            <div class="service-name">Two Cornrows</div>
+            <div class="service-price">Starting from $40</div>
+            <div class="service-desc">Classic double braids — timeless, sleek, and always a statement.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="images/processed/ponytail_cornrows.jpg" alt="Ponytail Cornrows by Ariane">
+          <div class="service-info">
+            <div class="service-name">Ponytail Cornrows</div>
+            <div class="service-price">Starting from $100</div>
+            <div class="service-desc">Sculpted cornrows swept into a bold, elegant high ponytail.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="images/processed/lemonade_braids.jpg" alt="Lemonade Braids by Ariane">
+          <div class="service-info">
+            <div class="service-name">Lemonade Braids</div>
+            <div class="service-price">Starting from $180</div>
+            <div class="service-desc">Side-swept cornrows made iconic. Sleek, editorial, and unforgettable.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="images/processed/half_cornrows_with_weaves.jpg" alt="Half Cornrows with Weave by Ariane">
+          <div class="service-info">
+            <div class="service-name">Half Cornrows</div>
+            <div class="service-price">Starting from $180</div>
+            <div class="service-desc">Cornrows on top flowing into loose curls or weave. The best of both worlds.</div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="images/processed/senegalese_twists.jpg" alt="Senegalese Twists by Ariane">
           <div class="service-info">
             <div class="service-name">Senegalese Twists</div>
-            <div class="service-price">Starting from $150</div>
+            <div class="service-price">Starting from $180</div>
             <div class="service-desc">Silky, elegant rope twists that flow beautifully and protect your natural hair.</div>
           </div>
         </div>
         <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1674075303059-951059d2914d?w=500&q=80" alt="Passion Twists">
+          <img src="images/processed/natural_twists.jpg" alt="Natural Twists by Ariane">
           <div class="service-info">
-            <div class="service-name">Passion Twists</div>
-            <div class="service-price">Starting from $160</div>
-            <div class="service-desc">Passion, spring &amp; Nubian twists — soft, curly, and effortlessly natural.</div>
+            <div class="service-name">Natural Twists</div>
+            <div class="service-price">Starting from $180</div>
+            <div class="service-desc">Two-strand twists on natural hair. Protective, beautiful, and full of texture.</div>
           </div>
         </div>
         <div class="service-card">
-          <img src="https://plus.unsplash.com/premium_photo-1694618624187-431b428363a0?w=500&q=80" alt="Crochet Braids">
+          <img src="images/processed/butterfly_locs.jpg" alt="Butterfly Locs by Ariane">
           <div class="service-info">
-            <div class="service-name">Crochet Braids</div>
-            <div class="service-price">Starting from $120</div>
-            <div class="service-desc">Quick, lightweight, and endlessly versatile. A protective style with limitless texture options.</div>
-          </div>
-        </div>
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1653263169991-50fb6e1c8836?w=500&q=80" alt="Faux Locs">
-          <div class="service-info">
-            <div class="service-name">Faux Locs</div>
+            <div class="service-name">Butterfly Locs</div>
             <div class="service-price">Starting from $200</div>
-            <div class="service-desc">Faux locs, soft locs &amp; butterfly locs — textured beauty without the long-term commitment.</div>
-          </div>
-        </div>
-        <div class="service-card">
-          <img src="https://plus.unsplash.com/premium_photo-1670006474124-a23db3cde1b9?w=500&q=80" alt="Micro Braids">
-          <div class="service-info">
-            <div class="service-name">Micro Braids</div>
-            <div class="service-price">Starting from $250</div>
-            <div class="service-desc">Delicate, intricate, and stunning. Ultra-fine braids for the ultimate in detail and elegance.</div>
+            <div class="service-desc">Distressed, textured locs with a bohemian edge. Soft, full, and stunning.</div>
           </div>
         </div>
       </div>
@@ -1130,10 +1165,10 @@
       <div class="footer-col">
         <h4>Hours</h4>
         <ul>
-          <li><a href="#">Mon–Thu: 8am – 7pm</a></li>
-          <li><a href="#">Fri–Sat: 7am – 7pm</a></li>
-          <li><a href="#">Sunday: 8am – 7pm</a></li>
-          <li style="margin-top:16px"><a href="tel:+15551234567">(555) 123-4567</a></li>
+          <li><a href="#">Mon–Thu: 8AM – 7PM</a></li>
+          <li><a href="#">Fri–Sat: 7AM – 7PM</a></li>
+          <li><a href="#">Sunday: 8AM – 7PM</a></li>
+          <li style="margin-top:16px"><a href="tel:+12404239347">(240) 423-9347</a></li>
           <li><a href="/cdn-cgi/l/email-protection#95fdf0f9f9fad5f4e7fcf4fbf0fdf4fce7f7e7f4fcf1fcfbf2bbf6faf8"><span class="__cf_email__" data-cfemail="2149444d4d4e61405348404f44494048534353404845484f460f424e4c">[email&#160;protected]</span></a></li>
         </ul>
       </div>
